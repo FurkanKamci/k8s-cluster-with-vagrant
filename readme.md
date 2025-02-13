@@ -8,17 +8,12 @@ https://developer.hashicorp.com/vagrant/install
 ```bash
 vagrant up # Klasörün içerisinde terminal açarız ve bu komutu çalıştırırız. Klasörde bulunan Vagrantfile ı okuyarak cluster'ı oluşturmaya başlar.
 
-# Tanımlı tüm makineleri (veya belirli bir makineyi vagrant up <makine_adi>) başlatır.
-vagrant status
-
-# Sanal makinelerin durumlarını (çalışıyor, kapalı vs.) listeler.
-vagrant ssh <makine_adi>
-
-# Belirtilen sanal makineye SSH üzerinden bağlanmanızı sağlar.
+vagrant ssh <makine_adi> # Belirtilen VM ismi ile SSH üzerinden bağlanmanızı sağlar.
 # Örneğin:
-    vagrant ssh master # Bağlandıktan sonra `sudo su ` ile Root kullanıcısına geçip işlemlerimizi yapabiliriz.
-    vagrant ssh worker1
+vagrant ssh master # Bağlandıktan sonra `sudo su ` ile Root kullanıcısına geçip işlemlerimizi yapabiliriz.
+vagrant ssh worker1
 
+vagrant status # Sanal makinelerin durumlarını (çalışıyor, kapalı vs.) listeler.
 vagrant halt # Çalışan makineleri düzgün bir şekilde kapatır.
 vagrant destroy # Makineleri kapatıp tamamen siler. (Bu işlem, makineleri yeniden oluşturmanızı gerektirebilir.)
 vagrant reload # Yapılandırma değişikliklerini uygulamak için makineleri yeniden başlatır.
