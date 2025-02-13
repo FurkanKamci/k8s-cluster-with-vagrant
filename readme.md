@@ -1,5 +1,5 @@
 
-# Vagrant ile oluşturduğunuz sanal makineler üzerinde çalışmak için kullanabileceğiniz bazı temel komutlar şunlardır:
+#### Vagrant ile oluşturduğunuz sanal makineler üzerinde çalışmak için kullanabileceğiniz bazı temel komutlar şunlardır:
 ```bash
 vagrant up # Klasörün içerisinde terminal açarız ve bu komutu çalıştırırız. Klasörde bulunan Vagrantfile ı okuyarak cluster'ı oluşturmaya başlar.
 
