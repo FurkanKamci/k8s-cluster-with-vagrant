@@ -1,9 +1,6 @@
 #### Ön Hazırlık :
 İlk olarak sunucuya virtual box kurulumu yapılması gerekiyor. Sonra link den vagrant dosyasının indirilip yüklenmesi gerekiyor.
 
-##### Dosya paylaşımı ile ilgili hata geliyorsa aşağıdaki komutu kullanabiliriz.
-- Windows için : setx VAGRANT_DISABLE_VBOXSYMLINKCREATE 1
-
 #### Link :
 https://developer.hashicorp.com/vagrant/install
 
@@ -25,3 +22,5 @@ vagrant validate # Vagrantfile 'ı kontrol eder.
 vagrant box remove ubuntu/focal64
 vagrant box add ubuntu/focal64
 ```
+##### Eğer dosya paylaşımı ile ilgili hata geliyorsa aşağıdaki komutu kullanabiliriz.
+- Windows için : setx VAGRANT_DISABLE_VBOXSYMLINKCREATE 1
