@@ -1,6 +1,9 @@
 #### Ön Hazırlık :
 İlk olarak sunucuya virtual box kurulumu yapılması gerekiyor. Sonra link den vagrant dosyasının indirilip yüklenmesi gerekiyor.
 
+##### Dosya paylaşımı yapabilmek için değişken eklenmesi gerekiyor.
+- Windows için : setx VAGRANT_DISABLE_VBOXSYMLINKCREATE 1
+
 #### Link :
 https://developer.hashicorp.com/vagrant/install
 
