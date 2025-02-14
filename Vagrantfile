@@ -67,7 +67,7 @@ EOF
         sudo systemctl restart kubelet
         # --- Kubernetes Master Kurulumu ---
         # --apiserver-advertise-address bizim master node ile ayarladığımız adres olmalı. Cluster bu network kartı üzerinden haberleşmeli.
-        sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=192.168.56.10
+        sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=192.168.56.10 --ignore-preflight-errors=all
         sleep 30
         echo "#############################################"
         # --- Kubectl Konfigürasyonu ---
