@@ -22,4 +22,6 @@ vagrant destroy # Makineleri kapatıp tamamen siler. (Bu işlem, makineleri yeni
 vagrant reload # Yapılandırma değişikliklerini uygulamak için makineleri yeniden başlatır.
 vagrant provision # Vagrantfile'da tanımlı provisioning (kurulum/konfigürasyon) scriptlerini yeniden çalıştırır.
 vagrant validate # Vagrantfile 'ı kontrol eder.
+vagrant box remove ubuntu/focal64
+vagrant box add ubuntu/focal64
 ```
