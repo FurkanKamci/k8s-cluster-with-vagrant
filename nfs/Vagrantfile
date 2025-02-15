@@ -1,0 +1,46 @@
+Vagrant.configure("2") do |config|
+    # Ubuntu Focal (20.04) tabanlı bir image kullanıyoruz
+    config.vm.box = "ubuntu/focal64"
+
+    #########################################
+    # NFS Host Tanımı
+    #########################################
+    config.vm.define "nfs" do |nfs|
+        nfs.vm.hostname = "nfs"
+        nfs.vm.network "private_network", ip: "192.168.56.30"
+    
+        nfs.vm.provider "virtualbox" do |vb|
+          # Ram ve CPU Kullanılan pc nin özelliklerine göre değiştirilmeli.
+          vb.memory = 2048
+          vb.cpus   = 2
+        end
+
+        # Host içinde Shell işlemlerinin yapılması.
+        nfs.vm.provision "shell", inline: <<-SHELL
+
+        # Paket listelerini güncelle ve Docker'ı yükle
+        sudo apt-get update
+        sudo apt-get install -y docker.io
+    
+        # Docker servisini etkinleştirir ve başlatır
+        sudo systemctl enable docker
+        sudo systemctl start docker
+    
+        # NFS paylaşımı için kullanılacak dizini oluşturulur
+        sudo mkdir -p /nfsshare
+        sudo chmod 777 /nfsshare
+    
+        # Docker ile NFS sunucusu çalıştır:
+        # --privileged: Konteynerin gerekli çekirdek özelliklerine erişebilmesi için kullanılır.
+        # -v /nfsshare:/nfsshare: Konteyner ile ana makine arasında dizin paylaşımı yapılır.
+        # -e SHARED_DIRECTORY=/nfsshare: İmajın NFS paylaşım dizinini belirtmesi için ortam değişkenini belirtir.
+        # -p 2049:2049: NFS'nin kullandığı porta yönlendirilir.
+        sudo docker run -d --name nfs-server --privileged \
+            -v /nfsshare:/nfsshare \
+            -e SHARED_DIRECTORY=/nfsshare \
+            -p 2049:2049 \
+            itsthenetwork/nfs-server-alpine
+        SHELL
+    end
+end
+  
