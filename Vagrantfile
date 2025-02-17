@@ -84,6 +84,7 @@ EOF
         JOIN_CMD=$(kubeadm token create --print-join-command)
         echo "$JOIN_CMD" | sudo tee /vagrant/join.sh
         echo "Join komutu /vagrant/join.sh dosyasına yazıldı."
+        sudo apt-get install -y nfs-common
         SHELL
     end
   
@@ -159,6 +160,7 @@ EOF
             JOIN_CMD=$(cat /vagrant/join.sh)
             echo "Worker: Join komutu bulundu: $JOIN_CMD"
             sudo $JOIN_CMD
+            sudo apt-get install -y nfs-common
             SHELL
       end
     end
