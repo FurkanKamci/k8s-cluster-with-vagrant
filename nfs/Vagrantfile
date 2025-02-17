@@ -1,7 +1,6 @@
 Vagrant.configure("2") do |config|
     # Ubuntu Focal (20.04) tabanlı bir image kullanıyoruz
     config.vm.box = "ubuntu/focal64"
-  
     #########################################
     # NFS Sunucu Tanımı
     #########################################
@@ -10,36 +9,28 @@ Vagrant.configure("2") do |config|
       nfs.vm.network "private_network", ip: "192.168.56.30"
       
       nfs.vm.provider "virtualbox" do |vb|
-        # RAM ve CPU ayarları; makinenizin kaynaklarına göre düzenleyin.
         vb.memory = 2048
         vb.cpus   = 2
       end
   
       # NFS sunucusunun kurulumu ve ayarlarının yapılması
       nfs.vm.provision "shell", inline: <<-SHELL
-        # Paket listelerini güncelle
+
         sudo apt-get update
         
-        # NFS sunucu paketlerini kur (nfs-kernel-server)
         sudo apt-get install -y nfs-kernel-server
-        
-        # Paylaşım dizinini oluştur ve izinlerini ayarla
+
         sudo mkdir -p /nfsshare
         sudo chmod 777 /nfsshare
         
-        # /etc/exports dosyasına paylaşım kuralı ekle
-        # Örneğin: 192.168.56.0/24 alt ağındaki tüm makineler okuma/yazma erişimine sahip olsun
         if ! grep -q "/nfsshare" /etc/exports; then
           echo "/nfsshare 192.168.56.0/24(rw,sync,no_subtree_check,no_root_squash)" | sudo tee -a /etc/exports
         fi
         
-        # Export ayarlarını yeniden yükle
         sudo exportfs -rav
         
-        # NFS sunucusunu yeniden başlat
         sudo systemctl restart nfs-kernel-server
         
-        # Durumu kontrol etmek için export bilgilerini görüntüle
         echo "NFS Exports:"
         sudo exportfs -v
       SHELL
