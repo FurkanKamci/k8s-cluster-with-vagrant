@@ -2,6 +2,7 @@
 Vagrant.configure("2") do |config|
     # Tüm makineler için temel box: Ubuntu 20.04 (Focal)
     config.vm.box = "ubuntu/focal64"
+    config.vm.boot_timeout = 600
   
     #########################################
     # Master Node Tanımı
